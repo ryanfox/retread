@@ -16,7 +16,7 @@ def main(args):
         clip = VideoFileClip(args.file)
         frames = [imagehash.dhash(Image.fromarray(frame)) for frame in clip.iter_frames()]
 
-    if args.save_hashes:
+    if args.save:
         with open(args.file + '.json', 'w') as f:
             json.dump([str(frame) for frame in frames], f)
 
