@@ -39,6 +39,7 @@
 
     var yAxis = d3.svg.axis()
             .scale(y)
+            .tickFormat(function(d) { return y.tickFormat(4, d3.format(",d"))(d) })
             .orient("left");
 
     var area = d3.svg.area()
@@ -68,10 +69,19 @@
                 .attr("transform", "translate(0," + height + ")")
                 .call(xAxis);
 
+        svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
         svg.append("text")
             .attr("text-anchor", "middle")
-            .attr("transform", "translate(" + (width / 2) + "," + (height + margin.bottom) + ")")
-            .text("Frame #");
+            .attr("transform", "translate(" + (-margin.left / 2) + "," + (height / 2) + ")rotate(-90)")
+            .text("Duplicate count");
+
+        svg.append("text")
+                .attr("text-anchor", "middle")
+                .attr("transform", "translate(" + (width / 2) + "," + (height + margin.bottom) + ")")
+                .text("Frame #");
 
     });
 
