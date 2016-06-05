@@ -32,3 +32,15 @@ Save hashes for faster re-use later:
 Reuse saved hashes:
 
     $ python retread.py -u my_video.mp4.json > scores.json
+
+Save the N most common frames (can be combined with `-u`, but still need to specify file):
+
+    $ python retread.py -u my_video.mp4.json -c 5 my_video.mp4 > scores.json
+    $ ls
+    0.jpg
+    1.jpg
+    2.jpg
+    3.jpg
+    4.jpg
+    my_video.mpy
+    [etc...]
