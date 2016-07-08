@@ -13,8 +13,12 @@ A video with high spikes reuses a lot of short shots or single images.  For exam
 ![memento](https://i.imgur.com/YZ6vORD.png)
 
 ## Installation
+Clone the repository:
 
     $ git clone git@github.com:ryanfox/retread.git
+
+Install dependencies:
+
     $ cd retread
     $ pip install -r requirements.txt
 
