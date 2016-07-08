@@ -23,21 +23,45 @@ Install dependencies:
     $ pip install -r requirements.txt
 
 ## Usage
-The simplest way - just process a video file:
+
+### Quickstart
 
     $ python retread.py my_video.mp4 > scores.json
 
-Processing a video can take a while - several minutes for a feature-length file.  There are a lot of frames to analyze!  Once it's done, open `bar.html` in a web browser to view the results.  It will look for a file named `scores.json` to populate data.
+Open `bar.html` in a browser to see the data plotted.
 
-Save hashes for faster re-use later:
+### Advanced usage
+Process a video file:
+
+    $ python retread.py my_video.mp4 > scores.json
+
+`scores.json` will contain a list of integers, where each element is the number of duplicates that frame had in the original.
+
+Processing a video can take a while - several minutes for a feature-length file.  There are a lot of frames to analyze!  If you want to reprocess the same video without waiting, you can use the flag `-s` (for "save") to save the hashes for later:
 
     $ python retread.py -s my_video.mp4 > scores.json
 
-Reuse saved hashes:
+The hashes will be saved in `my_video.mp4.json`.  retread will overwrite the file if it already exists.
+
+To reuse saved hashes, use the flag `-u` (for "use"):
 
     $ python retread.py -u my_video.mp4.json > scores.json
 
-Save the N most common frames (can be combined with `-u`, but still need to specify file):
+This will read the saved hashes (much faster than re-processing the whole video), do the duplicate analysis, and write the duplicate counts to standard out as usual.
+
+To see what the most-duplicated frames are, you can save a jpeg image of the N most common frames.  Use the flag `-c` (for "common"):
+
+    $ python retread.py -c 5 my_video.mp4 > scores.json
+    $ ls
+    0.jpg
+    1.jpg
+    2.jpg
+    3.jpg
+    4.jpg
+    my_video.mp4
+    [etc...]
+
+This can be combined with `-u`, but you still need to specify the video file):
 
     $ python retread.py -u my_video.mp4.json -c 5 my_video.mp4 > scores.json
     $ ls
@@ -46,5 +70,6 @@ Save the N most common frames (can be combined with `-u`, but still need to spec
     2.jpg
     3.jpg
     4.jpg
-    my_video.mpy
+    my_video.mp4
+    my_video.mp4.json
     [etc...]
